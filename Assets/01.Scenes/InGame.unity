@@ -424,9 +424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 3
+  runSpeed: 10
+  jumpForce: 0
   myRigid: {fileID: 1513634864}
   theCamera: {fileID: 963194227}
-  lookSensitivity: 1
+  lookSensitivity: 2
   cameraRotationLimit: 45
 --- !u!136 &1513634860
 CapsuleCollider:
