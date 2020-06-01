@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        CapsuleCollider = GetComponent<CapsuleCollider>();
        // theCamera = FindObjectOfType<Camera>();
         myRigid = GetComponent<Rigidbody>();
         //처음상태는 걷는상태
@@ -46,10 +48,36 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IsGround();
+        TryJump();
         TryRun();
         Move();
         CameraRotation();
         CharacterRotation();
+    }
+
+    private void TryJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)&&!isGround)
+        {
+            Jump();
+        }
+    }
+
+    private void IsGround()
+    {
+        //
+        //isGround=Physics.Raycast(transform.position,-transform.up)
+        //isGround = Physics.Raycast(transform.position, Vector3.down, 1f)
+
+        isGround = Physics.Raycast(transform.position, Vector3.down, CapsuleCollider.bounds.extents.y);
+
+
+    }
+
+    private void Jump()
+    {
+        myRigid.velocity = transform.up * jumpForce;
     }
 
     private void TryRun()
