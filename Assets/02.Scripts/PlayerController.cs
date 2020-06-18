@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&&!isGround)
+        if (Input.GetKeyDown(KeyCode.Space)&&isGround)
         {
             Jump();
         }
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         //isGround=Physics.Raycast(transform.position,-transform.up)
         //isGround = Physics.Raycast(transform.position, Vector3.down, 1f)
 
-        isGround = Physics.Raycast(transform.position, Vector3.down, CapsuleCollider.bounds.extents.y);
+        isGround = Physics.Raycast(transform.position, Vector3.down, CapsuleCollider.bounds.extents.y+0.1f);
 
 
     }
