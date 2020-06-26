@@ -15,7 +15,15 @@ public class PlayerController : MonoBehaviour
 
     private bool isRun = false;
     private bool isGround = true;
+    private bool isCrouch = false;
     private CapsuleCollider CapsuleCollider;
+
+    //앉았을때 얼마나 앉을지
+    [SerializeField]
+    private float crouchPosY;
+    private float originPosY;
+    private float applyCrouchPosY;
+
 
     //몸체 선언
     [SerializeField]
@@ -26,6 +34,11 @@ public class PlayerController : MonoBehaviour
     //카메라의 민감도
     [SerializeField]
     private float lookSensitivity;
+
+    [SerializeField]
+    private float crouchSpeed;
+
+
 
     //카메라 한계
     [SerializeField]
@@ -41,6 +54,10 @@ public class PlayerController : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
         //처음상태는 걷는상태
         applySpeed = walkSpeed;
+
+        //originPosY = transform.position.y;
+        originPosY = theCamera.transform.localPosition.y;
+        applyCrouchPosY = originPosY;
     }
 
 
@@ -51,10 +68,45 @@ public class PlayerController : MonoBehaviour
         IsGround();
         TryJump();
         TryRun();
+        TryCrouch();
         Move();
         CameraRotation();
         CharacterRotation();
     }
+
+    private void TryCrouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Crouch();
+        }
+    }
+
+    private void Crouch()
+    {
+        isCrouch = !isCrouch;
+        if (isCrouch)
+        {
+            applySpeed = crouchSpeed;
+            applyCrouchPosY = crouchPosY;
+            //isCrouch = false;
+        }
+        else
+        {
+            applySpeed = walkSpeed;
+            applyCrouchPosY = originPosY;
+            //isCrouch = true;
+        }
+
+        theCamera.transform.localPosition =
+            new Vector3(theCamera.transform.localPosition.x, applyCrouchPosY, theCamera.transform.localPosition.z);
+    }
+
+    IEnumerator CrouchCoroutine()
+    {
+    
+    }
+
 
     private void TryJump()
     {

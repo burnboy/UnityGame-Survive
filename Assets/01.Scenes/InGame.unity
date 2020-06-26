@@ -426,9 +426,11 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 10
   jumpForce: 15
+  crouchPosY: 0
   myRigid: {fileID: 1513634864}
   theCamera: {fileID: 963194227}
   lookSensitivity: 2
+  crouchSpeed: 1
   cameraRotationLimit: 45
 --- !u!136 &1513634860
 CapsuleCollider:
