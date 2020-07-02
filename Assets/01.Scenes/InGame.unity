@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   runSpeed: 10
-  jumpForce: 15
+  jumpForce: 5
   crouchPosY: 0
   myRigid: {fileID: 1513634864}
   theCamera: {fileID: 963194227}
